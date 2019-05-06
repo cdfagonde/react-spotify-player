@@ -52,7 +52,7 @@ class App extends Component {
           is_playing: data.is_playing,
           progress_ms: data.progress_ms,
         });
-      }
+      } 
     });
   }
 
@@ -69,11 +69,9 @@ class App extends Component {
             > Login to Spotify </a>
           )}
           {this.state.token && (
-            <Player
-              item={this.state.item}
-              is_playing={this.state.is_playing}
-              progress_ms={this.progress_ms}
-            />
+            <Player item={this.state.item}
+                    is_playing={this.state.is_playing}
+                    progress_ms={this.progress_ms} />
           )}
         </header>
       </div>
