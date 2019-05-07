@@ -24,6 +24,7 @@ class App extends Component {
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
   }
+
   componentDidMount() {
     // Set token
     let _token = hash.access_token;
@@ -47,17 +48,18 @@ class App extends Component {
       },
       success: (data) => {
         console.log("data", data);
-        this.setState({
-          item: data.item,
-          is_playing: data.is_playing,
-          progress_ms: data.progress_ms,
-        });
+        if(data) {
+          this.setState({
+            item: data.item,
+            is_playing: data.is_playing,
+            progress_ms: data.progress_ms,
+          });
+        }
       } 
     });
   }
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
@@ -71,7 +73,7 @@ class App extends Component {
           {this.state.token && (
             <Player item={this.state.item}
                     is_playing={this.state.is_playing}
-                    progress_ms={this.progress_ms} />
+                    progress_ms={this.state.progress_ms} />
           )}
         </header>
       </div>
