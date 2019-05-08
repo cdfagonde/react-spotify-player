@@ -23,6 +23,14 @@ class App extends Component {
       progress_ms: 0
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+    this.setRefreshTime = this.setRefreshTime.bind(this);
+  }
+
+  setRefreshTime() {
+    this.setState({
+        refresh: Date.now()
+      });
+    this.componentDidMount();
   }
 
   componentDidMount() {
@@ -36,6 +44,8 @@ class App extends Component {
       });
       this.getCurrentlyPlaying(_token);
     }
+    // Preparamos nova execução
+    setTimeout( this.setRefreshTime, 1000 );
   }
 
   getCurrentlyPlaying(token) {
@@ -47,7 +57,7 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log("data", data);
+        // console.log("data", data);
         if(data) {
           this.setState({
             item: data.item,
@@ -65,9 +75,8 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           {!this.state.token && (
-            <a
-              className="btn btn--loginApp-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
+            <a className="btn btn--loginApp-link"
+               href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
             > Login to Spotify </a>
           )}
           {this.state.token && (
