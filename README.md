@@ -1,4 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Project is a little variation of react-spotify-player, by Joe Karlsson
+(https://www.joekarlsson.com/2019/04/how-to-build-a-spotify-player-with-react-in-15-minutes/).
 
 ## Available Scripts
 
